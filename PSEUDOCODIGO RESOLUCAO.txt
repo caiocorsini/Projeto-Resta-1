@@ -1,5 +1,8 @@
 PSEUDOCODIGO RESOLUCAO
 
+Isto é só uma ideia geral de como o algoritmo de resolver pode ser estruturado. Para termos um ponto de partida. Junto ao esqueleto.
+Muitas fontes indicam um algoritmo aproximadamente assim.
+
 resolver
     se jogadas = maxJogadas e ehSolucao:
         imprimir jogada
