@@ -42,12 +42,16 @@ void printMatriz(int** matriz, int tamanho) {
     printf("| ");
     for (int j = 0; j < tamanho; j++) {
       if (matriz[i][j] == -1) printf("  ");
-      else printf("%d ", matriz[i][j]);
+      else if (matriz[i][j] == 0) printf("○ ");
+      else if (matriz[i][j] == 1) printf("● ");
+      //else printf("%d ", matriz[i][j]);
     }
     printf("|\n");
   }
 }
 
+// função determina o tamanho da matriz/tabuleiro analisando a qtd de elementos na primeira linha
+// interessante validar, em algum momento, se linhas == colunas!
 int determinarTamanho(char linha[]) {
     int i = 0;
     int tamanho = 0;
@@ -68,27 +72,28 @@ int determinarTamanho(char linha[]) {
 // ao usar matrizes com alocação dinâmica, não usamos matriz[][] (!!!)
 int** carregarArquivo(int* tamanho) {
 
-    // Abrir o arquivo
+    // abertura do arquivo
     FILE *arquivo = fopen("inicio.txt", "r");
     if (!arquivo) {
         printf("Eh necessario um arquivo inicio.txt no diretorio do programa para execucao.\nO arquivo nao foi encontrado. Tente novamente.\n");
         return NULL;
     }
 
-    // Vetor temporário para armazenar cada linha do arquivo
+    // criação de vetor temporário para armazenar cada linha do arquivo
     char temp[TAM_LINHA];
 
-    // Determinação do tamanho do jogo
+    // determinação do tamanho do jogo
+    // aproveitei essa determinação para validar se existe algum problema com o arquivo (vazio)
     if (fgets(temp, TAM_LINHA, arquivo) != NULL) {
         *tamanho = determinarTamanho(temp);
-        printf("Tamanho: %d\n", *tamanho);
+        // printf("Tamanho: %d\n", *tamanho);  // print de teste
     } else {
         printf("Erro ao ler a primeira linha do arquivo.\n");
         fclose(arquivo);
         return NULL;
     }
 
-    // Criação da matriz dinâmica
+    // criação da matriz dinâmica
     int** matriz = (int**)malloc(*tamanho * sizeof(int*));
     if (matriz == NULL) {
         printf("Erro ao alocar memoria para a matriz.\n");
@@ -111,20 +116,20 @@ int** carregarArquivo(int* tamanho) {
     }
 
     // Popular a matriz com os valores no arquivo
-    // antes de entrar no loop, a primeira linha já está me temp pois usamos para determinar o tamanho!
+    // antes de entrar no loop, a primeira linha já está em temp pois usamos para determinar o tamanho!
     char *token = strtok(temp, ",");
     for (int k = 0; k < *tamanho; k++) {
       matriz[0][k] = atoi(token); // Armazena o valor convertido
       token = strtok(NULL, ",");  // Pega o próximo token
     }
 
-    // agora podemos entrar no loop
+    // agora podemos entrar no loop e ler todo o arquivo
     int i = 1; // linha
+    int j = 0; // coluna
     while (fgets(temp, TAM_LINHA, arquivo) != NULL) {
         //printf("Linha: %s\n", temp); // PRINT PARA TESTES
-
-        char *token = strtok(temp, ",");
-        for (int j = 0; j < *tamanho; j++) { // percorre coluna
+        char *token = strtok(temp, ","); // a declaração de char novamente parece redundante mas não é (por algum motivo)..
+        for (j = 0; j < *tamanho; j++) { // percorre coluna
             if (token != NULL) {
                 matriz[i][j] = atoi(token); // Armazena o valor convertido
                 token = strtok(NULL, ",");  // Pega o próximo token
@@ -136,6 +141,7 @@ int** carregarArquivo(int* tamanho) {
         i++;
     }
 
+    if (i != j) printf("ERRO! A matriz precisa ser quadrada!\n");
     fclose(arquivo);
     return matriz;
 }
