@@ -7,7 +7,7 @@
 
 //cd "DIRETORIO" && gcc -o main main.c && main
 
-
+/*
 int exemplo_matriz[7][7] = {
     {-1, -1, 1, 1, 1, -1, -1},
     {-1, -1, 1, 1, 1, -1, -1},
@@ -27,6 +27,7 @@ int exemplo_matriz_solucionada[7][7] = {
     {-1, -1, 0, 0, 0, -1, -1},
     {-1, -1, 0, 0, 0, -1, -1}
 };
+*/
 
 
 // Estrutura para jogada
@@ -177,17 +178,6 @@ bool ehSolucao(int* matriz, int lin, int col) {
         }
     }
     return cont1 == 1;
-}
-
-
-// Funcao para imprimir tabuleiro
-// Para ajudar no desenvolvimento
-void imprimirTabuleiro(int* matriz, int lin, int col){
-    for(int i=0; i<lin; i++){
-        for(int j=0; j<col; j++)
-            printf("%d ", *(matriz + i * col + j));
-        printf("\n");
-    }
 }
 
 void resolver(){
