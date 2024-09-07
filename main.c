@@ -93,7 +93,7 @@ bool jogadaEhValida(){
     return true;
 }
 
-void gerarTodasJogadasPossiveis(){
+void gerarTodasJogadasPossiveis(Jogada jogadas[]){
     
 }
 

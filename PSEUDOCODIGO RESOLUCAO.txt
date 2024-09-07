@@ -1,0 +1,13 @@
+PSEUDOCODIGO RESOLUCAO
+
+resolver
+    se jogadas = maxJogadas e ehSolucao:
+        imprimir jogada
+    senao
+        gerarJogadasPossiveis
+        para cada jogada em jogadasPossiveis:
+            fazerJogada(jogada)
+            se jogadaEhValida:
+                resolver
+            senao
+                desfazerJogada(jogada)
