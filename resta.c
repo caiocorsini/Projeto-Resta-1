@@ -21,22 +21,45 @@ bool ehSolucao(int** matriz, int tamanho) {
     return cont1 == 1;
 }
 
-void resolver(){
+void fazerJogada(int** matriz, int tamanho, Jogada jogadaAtual){
 
 }
 
-void fazerJogada(){
+void desfazerJogada(int** matriz, int tamanho, Jogada jogadaAtual){
 
 }
 
-void desfazerJogada(){
-
-}
-
-bool jogadaEhValida(){
+bool jogadaEhValida(int** matriz, int tamanho){
     return true;
 }
 
 void gerarTodasJogadasPossiveis(Jogada jogadas[]){
     
+}
+
+bool resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas){
+    if(nJogadas == maxJogadas){
+        if(ehSolucao(matriz, tamanho)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    Jogada arrJogadas[100];
+    gerarTodasJogadasPossiveis(arrJogadas);
+    int i = 0;
+    while(arrJogadas[i].daLin != -1){
+        fazerJogada(matriz, tamanho, arrJogadas[i]);
+        if(jogadaEhValida(matriz, tamanho)){
+            bool result = resolver(matriz,tamanho,maxJogadas,nJogadas+1);
+            if(result){
+                // Imprimir jogada
+                return true;
+            }
+        } else {
+            desfazerJogada(matriz, tamanho, arrJogadas[i]);
+        }
+        i++;
+    }
+    return false;
 }

@@ -3,13 +3,14 @@
 #include "jogada.h"
 
 bool ehSolucao(int** matriz, int tamanho);
-void resolver();
 
-void fazerJogada();
+bool resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas);
 
-void desfazerJogada();
+void fazerJogada(int** matriz, int tamanho, Jogada jogadaAtual);
 
-bool jogadaEhValida();
+void desfazerJogada(int** matriz, int tamanho, Jogada jogadaAtual);
+
+bool jogadaEhValida(int** matriz, int tamanho);
 
 void gerarTodasJogadasPossiveis(Jogada jogadas[]);
 
