@@ -92,5 +92,13 @@ void main(){
     int tamanho;
     int** matriz = carregarArquivo(&tamanho);
     printMatrizASCII(matriz, tamanho);
-    printf("\n%d\n", ehSolucao(matriz,tamanho));
+
+    // Teste gerar jogadas
+    Jogada exemploJogadas[100];
+    gerarTodasJogadasPossiveis(matriz,tamanho,exemploJogadas);
+    int i=0;
+    while(exemploJogadas[i].daLin != -1){
+        imprimirJogada(exemploJogadas[i]);
+        i++;
+    }
 }
