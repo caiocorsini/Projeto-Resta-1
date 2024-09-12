@@ -2,71 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "uteis.h"
+#include "jogada.h"
+#include "resta.h"
 
 #define TAM_LINHA 50
-
-//cd "DIRETORIO" && gcc -o main main.c && main
-
-/*
-int exemplo_matriz[7][7] = {
-    {-1, -1, 1, 1, 1, -1, -1},
-    {-1, -1, 1, 1, 1, -1, -1},
-      {1, 1, 1, 1, 1, 1, 1},
-      {1, 1, 1, 0, 1, 1, 1},
-      {1, 1, 1, 1, 1, 1, 1},
-    {-1, -1, 1, 1, 1, -1, -1},
-    {-1, -1, 1, 1, 1, -1, -1}
-};
-
-int exemplo_matriz_solucionada[7][7] = {
-    {-1, -1, 0, 0, 0, -1, -1},
-    {-1, -1, 0, 0, 0, -1, -1},
-    {0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0},
-    {-1, -1, 0, 0, 0, -1, -1},
-    {-1, -1, 0, 0, 0, -1, -1}
-};
-*/
-
-
-// Estrutura para jogada
-typedef struct {
-    int daLin;
-    int daCol;
-    int ateLin;
-    int ateCol;
-} Jogada;
-
-void printMatriz(int** matriz, int tamanho) {
-  for (int i = 0; i < tamanho; i++) {
-    printf("| ");
-    for (int j = 0; j < tamanho; j++) {
-      if (matriz[i][j] == -1) printf("  ");
-      else if (matriz[i][j] == 0) printf("○ ");
-      else if (matriz[i][j] == 1) printf("● ");
-      //else printf("%d ", matriz[i][j]);
-    }
-    printf("|\n");
-  }
-}
-
-// função determina o tamanho da matriz/tabuleiro analisando a qtd de elementos na primeira linha
-// interessante validar, em algum momento, se linhas == colunas!
-int determinarTamanho(char linha[]) {
-    int i = 0;
-    int tamanho = 0;
-
-    while (linha[i] != '\n' && linha[i] != '\0') {
-        char elemento = linha[i];
-        if (elemento == '1' || elemento == '0' || (elemento == '-' && linha[i+1] == '1')) {
-            tamanho++;
-            if (elemento == '-') i++; // para não contar - e 1 (no caso de -1) como elementos separados
-        }
-        i++;
-    }
-    return tamanho;
-}
 
 // função abre o arquivo, determina o tamanho do jogo, cria uma matriz adequada e popula com as informações
 // função retorna um ponteiro para a matriz e atualiza o tamanho
@@ -148,64 +88,9 @@ int** carregarArquivo(int* tamanho) {
 }
 
 
-
-// Retorna o numero de jogadas necessarias para finalizar o jogo
-// Conta a quantidade de 1s presentes e faz um decremento no final
-// Talvez seja interessante para o caso base e para o loop
-int nJogadasNecessarias(int* matriz, int lin, int col){
-    int n = 0;
-    for(int i=0; i<lin; i++){
-        for(int j=0; j<col; j++)
-            if(*(matriz + i * col + j) == 1) n++;
-    }
-    return n-1;
-}
-
-
-// Retorna se a matriz esta solucionada ou nao
-// Ve se soh tem uma bolinha restante
-// checa se tem exatamente uma peca no meio
-bool ehSolucao(int* matriz, int lin, int col) {
-    int linhaMeio = lin / 2;
-    int colunaMeio = col / 2;
-    if (*(matriz + linhaMeio * col + colunaMeio) != 1) return false;
-
-    int cont1 = 0;
-    for (int i = 0; i < lin; i++) {
-        for (int j = 0; j < col; j++) {
-            if (*(matriz + i * col + j) == 1) cont1++;
-            if (cont1 > 1) return false;
-        }
-    }
-    return cont1 == 1;
-}
-
-void resolver(){
-
-}
-
-void fazerJogada(){
-
-}
-
-void desfazerJogada(){
-
-}
-
-bool jogadaEhValida(){
-    return true;
-}
-
-void gerarTodasJogadasPossiveis(Jogada jogadas[]){
-    
-}
-
 void main(){
-    //printf("jogadas necessarias: %d\n", nJogadasNecessarias((int*)exemplo_matriz,7,7));
-    //printf("%d", ehSolucao((int*)exemplo_matriz_solucionada,7,7));
-    //imprimirTabuleiro((int*)exemplo_matriz,7,7);
     int tamanho;
     int** matriz = carregarArquivo(&tamanho);
-    printMatriz(matriz, tamanho);
-    
+    printMatrizASCII(matriz, tamanho);
+    printf("\n%d\n", ehSolucao(matriz,tamanho));
 }

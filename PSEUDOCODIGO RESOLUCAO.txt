@@ -3,14 +3,18 @@ PSEUDOCODIGO RESOLUCAO
 Isto é só uma ideia geral de como o algoritmo de resolver pode ser estruturado. Para termos um ponto de partida. Junto ao esqueleto.
 Muitas fontes indicam um algoritmo aproximadamente assim.
 
-resolver
-    se jogadas = maxJogadas e ehSolucao:
-        imprimir jogada
-    senao
-        gerarJogadasPossiveis
-        para cada jogada em jogadasPossiveis:
-            fazerJogada(jogada)
-            se jogadaEhValida:
-                resolver
-            senao
-                desfazerJogada(jogada)
+Resolver:
+Atingiu o max de jogadas?
+    É uma solução válida?
+        Sim: imprime toda a array de jogadas feitas
+        retorna true
+	Não: retorna false
+Gerar todas as jogadas possíveis (popular uma array de jogadas, local da chamada)
+para cada jogada possível
+    Fazer jogada
+    jogada é válida? (não gerou um beco sem saída)
+        Sim: chamada recursiva da função resolver
+        Se resolver retornar true:
+            Imprimir a jogada:
+            retornar true
+    desfazer jogada
