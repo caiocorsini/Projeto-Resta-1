@@ -14,4 +14,6 @@ bool jogadaEhValida(int** matriz, int tamanho);
 
 void gerarTodasJogadasPossiveis(int** matriz, int tamanho, Jogada jogadas[]);
 
+void imprimirJogada(Jogada jog);
+
 #endif

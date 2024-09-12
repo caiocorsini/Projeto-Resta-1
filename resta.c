@@ -33,11 +33,16 @@ bool jogadaEhValida(int** matriz, int tamanho){
     return true;
 }
 
+void imprimirJogada(Jogada jog){
+    printf("Linha: %d -> %d\n", jog.daLin+1, jog.ateLin+1);
+    printf("Coluna: %d -> %d\n\n", jog.daCol+1, jog.ateCol+1);
+}
+
 void gerarTodasJogadasPossiveis(int** matriz, int tamanho, Jogada jogadas[]){
     int ind = 0;
     for(int i=0; i<tamanho; i++){
         for(int j=0; j<tamanho; j++){
-            if(i+2 < tamanho){
+            if(i+2 < tamanho && matriz[i][j] == 1){
                 if(matriz[i+1][j] == 1 && matriz[i+2][j] == 0){ // Baixo
                     Jogada novaJogada;
                     novaJogada.daLin = i;
@@ -48,7 +53,7 @@ void gerarTodasJogadasPossiveis(int** matriz, int tamanho, Jogada jogadas[]){
                     ind++;
                 }
             }
-            if(i-2 >= 0){
+            if(i-2 >= 0 && matriz[i][j] == 1){
                 if(matriz[i-1][j] == 1 && matriz[i-2][j] == 0){ // Cima
                     Jogada novaJogada;
                     novaJogada.daLin = i;
@@ -59,7 +64,7 @@ void gerarTodasJogadasPossiveis(int** matriz, int tamanho, Jogada jogadas[]){
                     ind++;
                 }
             }
-            if(j+2 < tamanho){
+            if(j+2 < tamanho && matriz[i][j] == 1){
                 if(matriz[i][j+1] == 1 && matriz[i][j+2] == 0){ // Direita
                     Jogada novaJogada;
                     novaJogada.daLin = i;
@@ -70,7 +75,7 @@ void gerarTodasJogadasPossiveis(int** matriz, int tamanho, Jogada jogadas[]){
                     ind++;
                 }
             }
-            if(j-2 >= 0){
+            if(j-2 >= 0 && matriz[i][j] == 1){
                 if(matriz[i][j-1] == 1 && matriz[i][j-2] == 0){ // Esquerda
                     Jogada novaJogada;
                     novaJogada.daLin = i;
