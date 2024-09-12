@@ -33,8 +33,59 @@ bool jogadaEhValida(int** matriz, int tamanho){
     return true;
 }
 
-void gerarTodasJogadasPossiveis(Jogada jogadas[]){
-    
+void gerarTodasJogadasPossiveis(int** matriz, int tamanho, Jogada jogadas[]){
+    int ind = 0;
+    for(int i=0; i<tamanho; i++){
+        for(int j=0; j<tamanho; j++){
+            if(i+2 < tamanho){
+                if(matriz[i+1][j] == 1 && matriz[i+2][j] == 0){ // Baixo
+                    Jogada novaJogada;
+                    novaJogada.daLin = i;
+                    novaJogada.ateLin = i+2;
+                    novaJogada.daCol = j;
+                    novaJogada.ateCol = j;
+                    jogadas[ind] = novaJogada;
+                    ind++;
+                }
+            }
+            if(i-2 >= 0){
+                if(matriz[i-1][j] == 1 && matriz[i-2][j] == 0){ // Cima
+                    Jogada novaJogada;
+                    novaJogada.daLin = i;
+                    novaJogada.ateLin = i-2;
+                    novaJogada.daCol = j;
+                    novaJogada.ateCol = j;
+                    jogadas[ind] = novaJogada;
+                    ind++;
+                }
+            }
+            if(j+2 < tamanho){
+                if(matriz[i][j+1] == 1 && matriz[i][j+2] == 0){ // Direita
+                    Jogada novaJogada;
+                    novaJogada.daLin = i;
+                    novaJogada.ateLin = i;
+                    novaJogada.daCol = j;
+                    novaJogada.ateCol = j+2;
+                    jogadas[ind] = novaJogada;
+                    ind++;
+                }
+            }
+            if(j-2 >= 0){
+                if(matriz[i][j-1] == 1 && matriz[i][j-2] == 0){ // Esquerda
+                    Jogada novaJogada;
+                    novaJogada.daLin = i;
+                    novaJogada.ateLin = i;
+                    novaJogada.daCol = j;
+                    novaJogada.ateCol = j-2;
+                    jogadas[ind] = novaJogada;
+                    ind++;
+                }
+            }
+        }
+    }
+    Jogada sentinela;
+    sentinela.daLin = -1;
+    jogadas[ind] = sentinela;
 }
 
 bool resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas){
@@ -46,7 +97,7 @@ bool resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas){
         }
     }
     Jogada arrJogadas[100];
-    gerarTodasJogadasPossiveis(arrJogadas);
+    gerarTodasJogadasPossiveis(matriz, tamanho, arrJogadas);
     int i = 0;
     while(arrJogadas[i].daLin != -1){
         fazerJogada(matriz, tamanho, arrJogadas[i]);
