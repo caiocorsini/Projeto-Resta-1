@@ -59,7 +59,25 @@ void fazerJogada(int** matriz, int tamanho, Jogada jogadaAtual) {
 
 
 
-void desfazerJogada(int** matriz, int tamanho, Jogada jogadaAtual){
+void desfazerJogada(int** matriz, int tamanho, Jogada jogadaAtual) {
+
+    // vertical
+    if (jogadaAtual.daCol == jogadaAtual.ateCol) {
+        // de cima para baixo
+        if(jogadaAtual.daLin < jogadaAtual.ateLin) {
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol] = 1;
+            matriz[jogadaAtual.daLin + 1][jogadaAtual.daCol] = 1;
+            matriz[jogadaAtual.ateLin][jogadaAtual.ateCol] = 0;
+        } else {
+            // de baixo para cima
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol] = 1;
+            matriz[jogadaAtual.daLin -1 1][jogadaAtual.daCol] = 1;
+            matriz[jogadaAtual.ateLin][jogadaAtual.ateCol] = 0;
+        }
+        // horizontal
+    } else if (jogadaAtual.daLin == jogadaAtual.ateLin) {
+        // esquerda para direita
+    }
 
 }
 
