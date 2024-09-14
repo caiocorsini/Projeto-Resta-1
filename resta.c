@@ -21,23 +21,43 @@ bool ehSolucao(int** matriz, int tamanho) {
     return cont1 == 1;
 }
 
-void fazerJogada(int** matriz, int tamanho, Jogada jogadaAtual){
-    int linhaOrigem = jogadaAtual.daLin;
-    int colunaOrigem = jogadaAtual.daCol;
-    int linhaDestino = jogadaAtual.ateLin;
-    int colunaDestino = jogadaAtual.ateCol;
 
-    // ver se se é uma jogada vertical ou horizontal
-    if (linhaOrigem == linhaDestino) {
-        int colunaMeio = (colunaOrigem + colunaDestino) / 2;
-        matriz[linhaOrigem][colunaMeio] = 0;
-    } else if (colunaOrigem == colunaDestino) {
-        int linhaMeio = (linhaOrigem + linhaDestino) / 2;
-        matriz[linhaMeio][colunaOrigem] = 0;
+
+void fazerJogada(int** matriz, int tamanho, Jogada jogadaAtual) {
+    // vertical
+    if (jogadaAtual.daCol == jogadaAtual.ateCol) {
+        // de cima para baixo
+        if (jogadaAtual.daLin < jogadaAtual.ateLin) {
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol] = 0;
+            matriz[jogadaAtual.daLin + 1][jogadaAtual.daCol] = 0;
+            matriz[jogadaAtual.ateLin][jogadaAtual.ateCol] = 1;
+        }
+            // de baixo para cima
+        else {
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol] = 0;
+            matriz[jogadaAtual.daLin - 1][jogadaAtual.daCol] = 0;
+            matriz[jogadaAtual.ateLin][jogadaAtual.ateCol] = 1;
+        }
     }
-
-
+        // horizontal
+    else if (jogadaAtual.daLin == jogadaAtual.ateLin) {
+        //  esquerda para direita
+        if (jogadaAtual.daCol < jogadaAtual.ateCol) {
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol] = 0;
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol + 1] = 0;
+            matriz[jogadaAtual.ateLin][jogadaAtual.ateCol] = 1;
+        }
+            // direita para esquerda
+        else {
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol] = 0;
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol - 1] = 0;
+            matriz[jogadaAtual.ateLin][jogadaAtual.ateCol] = 1;
+        }
+    }
 }
+
+
+
 
 void desfazerJogada(int** matriz, int tamanho, Jogada jogadaAtual){
 
