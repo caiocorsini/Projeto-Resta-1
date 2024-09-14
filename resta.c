@@ -71,12 +71,22 @@ void desfazerJogada(int** matriz, int tamanho, Jogada jogadaAtual) {
         } else {
             // de baixo para cima
             matriz[jogadaAtual.daLin][jogadaAtual.daCol] = 1;
-            matriz[jogadaAtual.daLin -1 1][jogadaAtual.daCol] = 1;
+            matriz[jogadaAtual.daLin -1][jogadaAtual.daCol] = 1;
             matriz[jogadaAtual.ateLin][jogadaAtual.ateCol] = 0;
         }
         // horizontal
     } else if (jogadaAtual.daLin == jogadaAtual.ateLin) {
         // esquerda para direita
+        if(jogadaAtual.daCol < jogadaAtual.ateCol) {
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol] = 1;
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol + 1] = 1;
+            matriz[jogadaAtual.ateLin][jogadaAtual.ateCol] = 0;
+        } else {
+            // direita para esquerda
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol] = 1;
+            matriz[jogadaAtual.daLin][jogadaAtual.daCol - 1] = 1;
+            matriz[jogadaAtual.ateLin][jogadaAtual.ateCol] = 0;
+        }
     }
 
 }
