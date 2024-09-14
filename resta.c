@@ -22,6 +22,20 @@ bool ehSolucao(int** matriz, int tamanho) {
 }
 
 void fazerJogada(int** matriz, int tamanho, Jogada jogadaAtual){
+    int linhaOrigem = jogadaAtual.daLin;
+    int colunaOrigem = jogadaAtual.daCol;
+    int linhaDestino = jogadaAtual.ateLin;
+    int colunaDestino = jogadaAtual.ateCol;
+
+    // ver se se é uma jogada vertical ou horizontal
+    if (linhaOrigem == linhaDestino) {
+        int colunaMeio = (colunaOrigem + colunaDestino) / 2;
+        matriz[linhaOrigem][colunaMeio] = 0;
+    } else if (colunaOrigem == colunaDestino) {
+        int linhaMeio = (linhaOrigem + linhaDestino) / 2;
+        matriz[linhaMeio][colunaOrigem] = 0;
+    }
+
 
 }
 
