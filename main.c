@@ -88,7 +88,7 @@ int** carregarArquivo(int* tamanho) {
 }
 
 
-void main(){
+int main(){
     int tamanho;
     int** matriz = carregarArquivo(&tamanho);
     printMatrizASCII(matriz, tamanho);
