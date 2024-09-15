@@ -132,7 +132,7 @@ void printMatrizArquivo(int** matriz, int tamanho, FILE* arquivo) {
 }
 
 // recebe um vetor de jogadas e imprime o conteúdo, formatado, de tras para frente, em um .txt
-void outputJogadasTabuleiro (Jogada jogadas[], int numJogadas, int *contadorSaidas) {
+int outputJogadasTabuleiro (Jogada jogadas[], int numJogadas, int *contadorSaidas) {
   char nomeArquivo[51];
   sprintf(nomeArquivo, "saida_%d.csv", *contadorSaidas);
   FILE *arquivo;
@@ -140,7 +140,7 @@ void outputJogadasTabuleiro (Jogada jogadas[], int numJogadas, int *contadorSaid
   if (!arquivo)
   {
     printf("Falha na criacao do arquivo!\n");
-    // return 0;
+    return 0;
   }
 
   int tamanho;
@@ -167,4 +167,5 @@ void outputJogadasTabuleiro (Jogada jogadas[], int numJogadas, int *contadorSaid
   }
   fclose(arquivo);
   (*contadorSaidas)++;
+  return 1;
 }

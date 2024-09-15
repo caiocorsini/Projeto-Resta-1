@@ -155,7 +155,7 @@ void gerarTodasJogadasPossiveis(int** matriz, int tamanho, Jogada jogadas[]){
     jogadas[ind] = sentinela;
 }
 
-bool resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas){
+bool resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas, Jogada* arrJogadas){
     if(nJogadas == maxJogadas){
         if(ehSolucao(matriz, tamanho)){
             return true;
@@ -163,13 +163,13 @@ bool resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas){
             return false;
         }
     }
-    Jogada arrJogadas[100];
+    // Jogada arrJogadas[100]; // agora esse vetor é passado como parametro da função
     gerarTodasJogadasPossiveis(matriz, tamanho, arrJogadas);
     int i = 0;
     while(arrJogadas[i].daLin != -1){
         fazerJogada(matriz, tamanho, arrJogadas[i]);
         if(jogadaEhValida(matriz, tamanho)){
-            bool result = resolver(matriz,tamanho,maxJogadas,nJogadas+1);
+            bool result = resolver(matriz,tamanho,maxJogadas,nJogadas+1, arrJogadas);
             if(result){
                 // Imprimir jogada
                 return true;
