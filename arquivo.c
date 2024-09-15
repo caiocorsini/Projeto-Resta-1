@@ -106,7 +106,7 @@ void outputJogadas (Jogada jogadas[], int numJogadas, int *contadorSaidas) {
     char temp[TAM_LINHA_OUT]; // vetor temporario para armazenar cada linha
 
     // snprintf para formatar elementos do struct. ver documentacao.
-    snprintf(temp, TAM_LINHA, "Jogada %2d: peça em (%d, %d) -> (%d, %d).",
+    snprintf(temp, TAM_LINHA, "Jogada %2d: peça em (%d, %d) -> (%d, %d).\n",
              i - numJogadas, jogadas[i].daLin, jogadas[i].daCol, jogadas[i].ateLin, jogadas[i].ateCol);
     // printf("%s", temp);  // print para testes
 
@@ -116,4 +116,55 @@ void outputJogadas (Jogada jogadas[], int numJogadas, int *contadorSaidas) {
   fclose(arquivo);
   (*contadorSaidas)++;
   // return 1;
+}
+
+void printMatrizArquivo(int** matriz, int tamanho, FILE* arquivo) {
+  for (int i = 0; i < tamanho; i++) {
+    printf("| ");
+    for (int j = 0; j < tamanho; j++) {
+      if (matriz[i][j] == -1) fprintf(arquivo, "  ");
+      else if (matriz[i][j] == 0) fprintf(arquivo, "○ ");
+      else if (matriz[i][j] == 1) fprintf(arquivo, "● ");
+      //else printf("%d ", matriz[i][j]);
+    }
+    printf("|\n");
+  }
+}
+
+// recebe um vetor de jogadas e imprime o conteúdo, formatado, de tras para frente, em um .txt
+void outputJogadasTabuleiro (Jogada jogadas[], int numJogadas, int *contadorSaidas) {
+  char nomeArquivo[51];
+  sprintf(nomeArquivo, "saida_%d.csv", *contadorSaidas);
+  FILE *arquivo;
+  arquivo = fopen(nomeArquivo, "w");
+  if (!arquivo)
+  {
+    printf("Falha na criacao do arquivo!\n");
+    // return 0;
+  }
+
+  int tamanho;
+  int** tabuleiro = carregarArquivo(&tamanho);
+
+  fprintf(arquivo, "Tabuleiro inicial:\n");
+  printMatrizArquivo(tabuleiro, tamanho, arquivo);
+
+  // loop para percorrer todo o vetor de jogadas
+  for (int i = numJogadas - 1; i = 0; i--) {
+    char temp[TAM_LINHA_OUT]; // vetor temporario para armazenar cada linha
+
+    // snprintf para formatar elementos do struct. ver documentacao.
+    snprintf(temp, TAM_LINHA, "Jogada %2d: peça em (%d, %d) -> (%d, %d).\n",
+             i - numJogadas, jogadas[i].daLin, jogadas[i].daCol, jogadas[i].ateLin, jogadas[i].ateCol);
+    // printf("%s", temp);  // print para testes
+
+    // agora imprimimos a string formatada no arquivo de saida
+    fprintf(arquivo, "%s", temp);
+
+    // e imprimimos o tabuleiro
+    fazerJogada(tabuleiro, tamanho, jogadas[i]);
+    printMatrizArquivo(tabuleiro, tamanho, arquivo);
+  }
+  fclose(arquivo);
+  (*contadorSaidas)++;
 }
