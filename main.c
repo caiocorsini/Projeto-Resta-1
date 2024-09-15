@@ -1,3 +1,12 @@
+/**
+ * PROJETO E ANALISE DE ALGORITMOS II
+ * TURMA 04P
+ * PROJETO RESTA UM
+ * ALAN MENIUK GLEIZER - 10416804
+ * CAIO VINICIUS CORSINI FILHO - 10342005
+ * GILBERTO DE MELO JÚNIOR - 10419275
+ * **/
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,8 +15,6 @@
 #include "jogada.h"
 #include "resta.h"
 #include "arquivo.h"
-
-
 
 int main(){
     // variaveis para o jogo
@@ -19,7 +26,6 @@ int main(){
     int opcao;
 
     // menu
-
     do {
         printf("#####  RESTA UM  #####\n");
         printf("--- menu principal ---\n");
@@ -65,16 +71,14 @@ int main(){
                 printf("Arquivo exportado com sucesso!\n");
             }
             break;
+
         case 4:
         printf("Encerrando programa...\n");
             return 1;
     }
-
-    
-
-
-    
+ 
     // Teste gerar jogadas
+    /*
     Jogada exemploJogadas[100];
     gerarTodasJogadasPossiveis(tabuleiro,tamanho,exemploJogadas);
     int i=0;
@@ -82,5 +86,5 @@ int main(){
         imprimirJogada(exemploJogadas[i]);
         i++;
     }
-    
+    */
 }
