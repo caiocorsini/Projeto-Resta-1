@@ -16,6 +16,8 @@
 #include "resta.h"
 #include "arquivo.h"
 
+void mostrarMenu() {}
+
 int main(){
     // variaveis para o jogo
     int tamanho;
@@ -26,6 +28,7 @@ int main(){
     int opcao = 1;
 
     // menu
+
         while(opcao>0 && opcao<5){
             printf("#####  RESTA UM  #####\n");
             printf("--- menu principal ---\n");
@@ -41,9 +44,11 @@ int main(){
                 case 1:
                     tabuleiro = carregarArquivo(&tamanho);
 
+
                     // print de teste - pos carregamento
                     printf("Arquivo carregado: \n");
                     printMatrizASCII(tabuleiro, tamanho);
+
 
                     // criação do vetor de jogadas
                     qtdMaxJogadas = nJogadasNecessarias(tabuleiro, tamanho);
@@ -53,6 +58,7 @@ int main(){
                         return 1;
                     }
                     break;
+
 
                 case 2:
                     if (jogadas == NULL) {
@@ -69,9 +75,11 @@ int main(){
                     }
                     break;
 
+
                 case 4:
                 printf("Encerrando programa...\n");
                     return 1;
         }
  }
+
 }
