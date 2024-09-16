@@ -4,7 +4,7 @@
 
 bool ehSolucao(int** matriz, int tamanho);
 
-resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas, Jogada* arrJogadas);
+bool resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas, Jogada* arrJogadas);
 
 void fazerJogada(int** matriz, int tamanho, Jogada jogadaAtual);
 

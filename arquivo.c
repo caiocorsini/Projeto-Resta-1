@@ -90,7 +90,7 @@ int** carregarArquivo(int* tamanho) {
 }
 
 // recebe um vetor de jogadas e imprime o conteúdo, formatado, de tras para frente, em um .txt
-void outputJogadas (Jogada jogadas[], int numJogadas, int *contadorSaidas) {
+int outputJogadas (Jogada jogadas[], int numJogadas, int *contadorSaidas) {
   char nomeArquivo[51];
   sprintf(nomeArquivo, "saida_%d.csv", *contadorSaidas);
   FILE *arquivo;
@@ -98,7 +98,7 @@ void outputJogadas (Jogada jogadas[], int numJogadas, int *contadorSaidas) {
   if (!arquivo)
   {
     printf("Falha na criacao do arquivo!\n");
-    // return 0;
+    return 0;
   }
 
   // loop para percorrer todo o vetor de jogadas
@@ -115,7 +115,7 @@ void outputJogadas (Jogada jogadas[], int numJogadas, int *contadorSaidas) {
   }
   fclose(arquivo);
   (*contadorSaidas)++;
-  // return 1;
+  return 1;
 }
 
 void printMatrizArquivo(int** matriz, int tamanho, FILE* arquivo) {

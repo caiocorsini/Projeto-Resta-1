@@ -16,6 +16,8 @@
 #include "resta.h"
 #include "arquivo.h"
 
+void mostrarMenu() {}
+
 int main(){
     // variaveis para o jogo
     int tamanho;
@@ -36,9 +38,8 @@ int main(){
         printf("   Seleciona uma opção: ");
         scanf("%d", &opcao);
         if (opcao > 4 || opcao < 1) printf("Opção inválida! Tente novamente...\n");
-    } while (opcao > 4 || opcao < 1);
 
-    switch (opcao) {
+        switch (opcao) {
         case 1:
             tabuleiro = carregarArquivo(&tamanho);
 
@@ -53,6 +54,7 @@ int main(){
                 printf("Erro ao alocar memória para a solução!\n");
                 return 1;
             }
+            
             break;
 
         case 2:
@@ -76,6 +78,9 @@ int main(){
         printf("Encerrando programa...\n");
             return 1;
     }
+    opcao = 0;
+    
+    } while (opcao > 4 || opcao < 1);
  
     // Teste gerar jogadas
     /*
