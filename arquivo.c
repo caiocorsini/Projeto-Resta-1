@@ -1,3 +1,12 @@
+/**
+ * PROJETO E ANALISE DE ALGORITMOS II
+ * TURMA 04P
+ * PROJETO RESTA UM
+ * ALAN MENIUK GLEIZER - 10416804
+ * CAIO VINICIUS CORSINI FILHO - 10342005
+ * GILBERTO DE MELO JÚNIOR - 10419275
+ * **/
+ 
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -102,12 +111,12 @@ int outputJogadas (Jogada jogadas[], int numJogadas, int *contadorSaidas) {
   }
 
   // loop para percorrer todo o vetor de jogadas
-  for (int i = numJogadas - 1; i = 0; i--) {
+  for (int i = 0; i < numJogadas; i++) {
     char temp[TAM_LINHA_OUT]; // vetor temporario para armazenar cada linha
 
     // snprintf para formatar elementos do struct. ver documentacao.
     snprintf(temp, TAM_LINHA, "Jogada %2d: peça em (%d, %d) -> (%d, %d).\n",
-             i - numJogadas, jogadas[i].daLin, jogadas[i].daCol, jogadas[i].ateLin, jogadas[i].ateCol);
+             i, jogadas[i].daLin, jogadas[i].daCol, jogadas[i].ateLin, jogadas[i].ateCol);
     // printf("%s", temp);  // print para testes
 
     // agora imprimimos a string formatada no arquivo de saida
@@ -150,12 +159,12 @@ int outputJogadasTabuleiro (Jogada jogadas[], int numJogadas, int *contadorSaida
   printMatrizArquivo(tabuleiro, tamanho, arquivo);
 
   // loop para percorrer todo o vetor de jogadas
-  for (int i = numJogadas - 1; i = 0; i--) {
+  for (int i = 0; i < tamanho; i++) {
     char temp[TAM_LINHA_OUT]; // vetor temporario para armazenar cada linha
 
     // snprintf para formatar elementos do struct. ver documentacao.
     snprintf(temp, TAM_LINHA, "Jogada %2d: peça em (%d, %d) -> (%d, %d).\n",
-             i - numJogadas, jogadas[i].daLin, jogadas[i].daCol, jogadas[i].ateLin, jogadas[i].ateCol);
+             i, jogadas[i].daLin, jogadas[i].daCol, jogadas[i].ateLin, jogadas[i].ateCol);
     // printf("%s", temp);  // print para testes
 
     // agora imprimimos a string formatada no arquivo de saida

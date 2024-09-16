@@ -1,3 +1,12 @@
+/**
+ * PROJETO E ANALISE DE ALGORITMOS II
+ * TURMA 04P
+ * PROJETO RESTA UM
+ * ALAN MENIUK GLEIZER - 10416804
+ * CAIO VINICIUS CORSINI FILHO - 10342005
+ * GILBERTO DE MELO JÚNIOR - 10419275
+ * **/
+ 
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -58,7 +67,6 @@ void fazerJogada(int** matriz, int tamanho, Jogada jogadaAtual) {
 
 
 
-
 void desfazerJogada(int** matriz, int tamanho, Jogada jogadaAtual) {
 
     // vertical
@@ -91,15 +99,14 @@ void desfazerJogada(int** matriz, int tamanho, Jogada jogadaAtual) {
 
 }
 
-bool jogadaEhValida(int** matriz, int tamanho){
-    return true;
-}
-
 void imprimirJogada(Jogada jog){
     printf("Linha: %d -> %d\n", jog.daLin+1, jog.ateLin+1);
     printf("Coluna: %d -> %d\n\n", jog.daCol+1, jog.ateCol+1);
 }
 
+
+// Gera todas as jogadas possiveis para um estado especifico do tabuleiro e popula a array de jogadas
+// Essa array eh depois usada em resolver() para testar todas as possibilidades de jogadas
 void gerarTodasJogadasPossiveis(int** matriz, int tamanho, Jogada jogadas[]){
     int ind = 0;
     for(int i=0; i<tamanho; i++){
@@ -151,32 +158,26 @@ void gerarTodasJogadasPossiveis(int** matriz, int tamanho, Jogada jogadas[]){
         }
     }
     Jogada sentinela;
-    sentinela.daLin = -1;
+    sentinela.daLin = -1; // Usa variavel sentinela para marcar o fim da array de jogadas
     jogadas[ind] = sentinela;
 }
 
-bool resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas, Jogada* arrJogadas){
-    if(nJogadas == maxJogadas){
-        if(ehSolucao(matriz, tamanho)){
-            return true;
-        } else {
-            return false;
-        }
-    }
-    // Jogada arrJogadas[100]; // agora esse vetor é passado como parametro da função
+// Funcao principal para resolver que usa backtracking
+bool resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas, Jogada* jogadasDeSolucao){
+    // Casos base para checar se já alcancou o maximo de jogadas
+    if (ehSolucao(matriz, tamanho)) return true;
+    if (nJogadas == maxJogadas) return false;
+    Jogada arrJogadas[66]; // Array auxiliar para armazenar todas as jogadas possiveis
     gerarTodasJogadasPossiveis(matriz, tamanho, arrJogadas);
     int i = 0;
     while(arrJogadas[i].daLin != -1){
         fazerJogada(matriz, tamanho, arrJogadas[i]);
-        if(jogadaEhValida(matriz, tamanho)){
-            bool result = resolver(matriz,tamanho,maxJogadas,nJogadas+1, arrJogadas);
-            if(result){
-                // Imprimir jogada
-                return true;
-            }
-        } else {
-            desfazerJogada(matriz, tamanho, arrJogadas[i]);
-        }
+        if(resolver(matriz,tamanho,maxJogadas,nJogadas+1,jogadasDeSolucao)){
+            //printf("(%d,%d) -> (%d,%d)\n", arrJogadas[i].daLin, arrJogadas[i].daCol, arrJogadas[i].ateLin, arrJogadas[i].ateCol);
+            jogadasDeSolucao[nJogadas] = arrJogadas[i];
+            return true;
+        }     
+        desfazerJogada(matriz, tamanho, arrJogadas[i]);
         i++;
     }
     return false;
