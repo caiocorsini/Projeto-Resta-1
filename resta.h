@@ -4,13 +4,11 @@
 
 bool ehSolucao(int** matriz, int tamanho);
 
-resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas, Jogada* arrJogadas);
+bool resolver(int** matriz, int tamanho, int maxJogadas, int nJogadas, Jogada* jogadasDeSolucao);
 
 void fazerJogada(int** matriz, int tamanho, Jogada jogadaAtual);
 
 void desfazerJogada(int** matriz, int tamanho, Jogada jogadaAtual);
-
-bool jogadaEhValida(int** matriz, int tamanho);
 
 void gerarTodasJogadasPossiveis(int** matriz, int tamanho, Jogada jogadas[]);
 
