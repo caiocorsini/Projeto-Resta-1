@@ -30,13 +30,13 @@ int main(){
     // menu
 
         while(opcao>0 && opcao<5){
-            printf("#####  RESTA UM  #####\n");
-            printf("--- menu principal ---\n");
+            printf("\n#####  RESTA UM  #####\n");
+            //printf("--- menu principal ---\n");
             printf("1. Carregar arquivo\n");
             printf("2. Resolver jogo\n");
             printf("3. Exportar solução\n");
             printf("4. Encerrar\n");
-            printf("   Seleciona uma opção: ");
+            printf("   Selecione uma opção: ");
             scanf("%d", &opcao);
             if (opcao > 4 || opcao < 1) printf("Opção inválida! Tente novamente...\n");
 
@@ -46,8 +46,8 @@ int main(){
 
 
                     // print de teste - pos carregamento
-                    printf("Arquivo carregado: \n");
-                    printMatrizASCII(tabuleiro, tamanho);
+                    printf("Arquivo carregado!\n");
+                    // printMatrizASCII(tabuleiro, tamanho); // print para testes
 
 
                     // criação do vetor de jogadas
@@ -70,7 +70,7 @@ int main(){
                     break;
                 
                 case 3:
-                    if (outputJogadas(jogadas, qtdMaxJogadas, &contadorSaidas)) {
+                    if (outputJogadasTabuleiro(jogadas, qtdMaxJogadas, &contadorSaidas)) {
                         printf("Arquivo exportado com sucesso!\n");
                     }
                     break;

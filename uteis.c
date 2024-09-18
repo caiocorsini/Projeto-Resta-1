@@ -48,9 +48,8 @@ int determinarTamanho(char linha[]) {
 
     while (linha[i] != '\n' && linha[i] != '\0') {
         char elemento = linha[i];
-        if (elemento == '1' || elemento == '0' || (elemento == '-' && linha[i+1] == '1')) {
+        if (elemento == '#' || elemento == 'o' || elemento == ' ') {
             tamanho++;
-            if (elemento == '-') i++; // para não contar - e 1 (no caso de -1) como elementos separados
         }
         i++;
     }
