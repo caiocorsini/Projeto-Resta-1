@@ -16,20 +16,18 @@
 #include "resta.h"
 #include "arquivo.h"
 
-void mostrarMenu() {}
-
 int main(){
     // variaveis para o jogo
     int tamanho;
     int** tabuleiro;
     int qtdMaxJogadas;
-    Jogada* jogadas = NULL; // precisa ser criado em main, mas só saberemos o tamanho após o usuário informar.. oslução malloc
+    Jogada* jogadas = NULL; // precisa ser criado em main, mas só saberemos o tamanho após o usuário informar.. solução = malloc
     int contadorSaidas = 1;
     int opcao = 1;
 
     // menu
 
-        while(opcao>0 && opcao<5){
+        while(opcao > 0 && opcao < 5) {
             printf("\n#####  RESTA UM  #####\n");
             //printf("--- menu principal ---\n");
             printf("1. Carregar arquivo\n");
@@ -44,11 +42,9 @@ int main(){
                 case 1:
                     tabuleiro = carregarArquivo(&tamanho);
 
-
                     // print de teste - pos carregamento
                     printf("Arquivo carregado!\n");
                     // printMatrizASCII(tabuleiro, tamanho); // print para testes
-
 
                     // criação do vetor de jogadas
                     qtdMaxJogadas = nJogadasNecessarias(tabuleiro, tamanho);
@@ -58,7 +54,6 @@ int main(){
                         return 1;
                     }
                     break;
-
 
                 case 2:
                     if (jogadas == NULL) {
@@ -75,11 +70,10 @@ int main(){
                     }
                     break;
 
-
                 case 4:
                 printf("Encerrando programa...\n");
                     return 1;
+            }
         }
- }
 
 }
