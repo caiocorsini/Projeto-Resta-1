@@ -53,7 +53,7 @@ int determinarTamanho(char linha[]) {
         }
         i++;
     }
-    return tamanho;
+    return tamanho - 2; // -2 pois agora temos # nas margens
 }
 
 // Retorna o numero de jogadas necessarias para finalizar o jogo

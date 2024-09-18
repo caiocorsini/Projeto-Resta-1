@@ -74,21 +74,26 @@ int** carregarArquivo(int* tamanho) {
     }
 
     // Popular a matriz com os valores no arquivo
+    // NAO PRECISA MAIS POIS A PRIMEIRA LINHA É MARGEM
     // antes de entrar no loop, a primeira linha já está em temp pois usamos para determinar o tamanho!
     // char *token = strtok(temp, ",");
+    /*
     for (int k = 0; k < *tamanho; k++) {
       matriz[0][k] = converterEntrada(temp[k]); // Armazena o valor convertido
     }
+    */
 
     // agora podemos entrar no loop e ler todo o arquivo
-    int i = 1; // linha
+    int i = 0; // linha // era 1 na leitura original, quando já haviamos lido a primeira linha
     int j = 0; // coluna
-    while (fgets(temp, TAM_LINHA, arquivo) != NULL) {
+    int l = 0;
+    while (l < *tamanho) { // não é mais while fgets != null, pois precisamos ignorar a última linha
+      fgets(temp, TAM_LINHA, arquivo);
         //printf("Linha: %s\n", temp); // PRINT PARA TESTES
         // char *token = strtok(temp, ","); // a declaração de char novamente parece redundante mas não é (por algum motivo)..
         for (j = 0; j < *tamanho; j++) { // percorre coluna
             if (temp != NULL) {
-                matriz[i][j] = converterEntrada(temp[j]); // Armazena o valor convertido
+                matriz[i][j] = converterEntrada(temp[j+1]); // Armazena o valor convertido // j+1 em temp para ignorar a margem
                 //token = strtok(NULL, ",");  // Pega o próximo token
             } else {
                 printf("Erro na linha %d.\n", i + 1);
@@ -96,6 +101,7 @@ int** carregarArquivo(int* tamanho) {
             }
         }
         i++;
+        l++;
     }
 
     if (i != j) printf("ERRO! A matriz precisa ser quadrada!\n");
