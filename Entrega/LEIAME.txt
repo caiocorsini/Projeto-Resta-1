@@ -1,0 +1,18 @@
+Projeto Resta 1 - Projeto Análise Algoritmos II
+
+Grupo:
+Alan Gleizer - 10416804
+Caio Corsini - 10342005
+Gilberto de Melo - 10419275
+
+Link Youtube: https://www.youtube.com/watch?v=sBkayFBctZE&t=5s
+
+Comandos para rodar em Windows:
+cd "<path onde estão os arquivos .c>"
+gcc -c main.c -o main.o
+gcc -c uteis.c -o uteis.o
+gcc -c jogada.c -o jogada.o 
+gcc -c resta.c -o resta.o 
+gcc -c arquivo.c -o arquivo.o 
+gcc main.o uteis.o jogada.o resta.o arquivo.o -o solitaire 
+solitaire
